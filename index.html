@@ -3,258 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>แกลเลอรีรูปภาพของฉัน - Theme Heart</title>
 
-    <title>แกลเลอรีรูปภาพของฉัน - Valentine Edition</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Mali:wght@400;600;700&display=swap" rel="stylesheet">
 
     <style>
+        /* ตั้งค่าลูกศรเมาส์เป็นรูปหัวใจ */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='%23ff2a6d'><path d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z'/></svg>"), auto;
         }
 
-        /* เปลี่ยนลูกศรเมาส์เป็นรูปหัวใจ SVG */
         body {
-            font-family: "Segoe UI", Tahoma, sans-serif;
-            background: linear-gradient(135deg, #ffedf0, #ffd3db, #ffebf0);
-            color: #4a154b;
+            font-family: "Mali", cursive, sans-serif;
+            background-color: #fff0f3;
+            color: #4a0010;
             position: relative;
             min-height: 100vh;
             overflow-x: hidden;
-            cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='%23e63946'><path d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z'/></svg>"), auto;
         }
 
-        /* ปุ่มและ Link เพิ่ม Custom Pointer */
-        a, .card {
-            cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 24 24' fill='%23ff4d6d'><path d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z'/></svg>"), pointer;
-        }
-
-        /* แอนิเมชันหัวใจลอยในฉากหลัง */
-        .hearts-bg {
+        /* หัวใจดวงใหญ่หลากสีตรงกลางฉากหลัง */
+        body::before {
+            content: "♥";
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 0;
-            overflow: hidden;
-        }
-
-        .heart-particle {
-            position: absolute;
-            bottom: -50px;
-            color: rgba(230, 57, 70, 0.35);
-            font-size: 24px;
-            animation: floatUp 8s infinite linear;
-        }
-
-        .heart-particle:nth-child(1) { left: 10%; animation-duration: 6s; font-size: 20px; }
-        .heart-particle:nth-child(2) { left: 25%; animation-duration: 9s; animation-delay: 1s; font-size: 32px; color: rgba(255, 77, 109, 0.4); }
-        .heart-particle:nth-child(3) { left: 40%; animation-duration: 7s; animation-delay: 2s; font-size: 16px; }
-        .heart-particle:nth-child(4) { left: 55%; animation-duration: 11s; animation-delay: 0.5s; font-size: 28px; }
-        .heart-particle:nth-child(5) { left: 70%; animation-duration: 8s; animation-delay: 3s; font-size: 22px; color: rgba(255, 77, 109, 0.4); }
-        .heart-particle:nth-child(6) { left: 85%; animation-duration: 10s; animation-delay: 1.5s; font-size: 36px; }
-
-        @keyframes floatUp {
-            0% {
-                transform: translateY(0) rotate(0deg);
-                opacity: 0;
-            }
-            10% {
-                opacity: 1;
-            }
-            90% {
-                opacity: 0.8;
-            }
-            100% {
-                transform: translateY(-110vh) rotate(360deg);
-                opacity: 0;
-            }
-        }
-
-        /* ส่วนหัว */
-        header {
-            text-align: center;
-            padding: 60px 20px 40px;
-            position: relative;
-            z-index: 1;
-        }
-
-        header h1 {
-            font-size: 42px;
-            color: #c9184a;
-            margin-bottom: 12px;
-            text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.8);
-        }
-
-        header p {
-            font-size: 18px;
-            color: #800f2f;
-            font-weight: 500;
-        }
-
-        /* แกลเลอรี */
-        .gallery {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 20px;
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 25px;
-            position: relative;
-            z-index: 1;
-        }
-
-        /* การ์ด */
-        .card {
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 8px 25px rgba(201, 24, 74, 0.15);
-            border: 2px solid #ffccd5;
-            transition: all 0.3s ease;
-        }
-
-        .card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 15px 35px rgba(201, 24, 74, 0.3);
-            border-color: #ff4d6d;
-        }
-
-        /* รูปภาพ */
-        .card img {
-            width: 100%;
-            height: 250px;
-            object-fit: cover;
-            display: block;
-            transition: transform 0.4s;
-        }
-
-        .card:hover img {
-            transform: scale(1.05);
-        }
-
-        /* ข้อความ */
-        .content {
-            padding: 20px;
-        }
-
-        .content h2 {
-            font-size: 22px;
-            color: #a4133c;
-            margin-bottom: 10px;
-        }
-
-        .content p {
-            font-size: 15px;
-            line-height: 1.7;
-            color: #590d22;
-        }
-
-        /* ส่วนท้าย */
-        footer {
-            text-align: center;
-            padding: 40px 20px;
-            margin-top: 40px;
-            background: linear-gradient(135deg, #a4133c, #800f2f);
-            color: #fff0f3;
-            position: relative;
-            z-index: 1;
-            box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.05);
-        }
-
-        footer p {
-            margin: 5px;
-        }
-
-        /* Responsive */
-        @media (max-width: 900px) {
-            .gallery {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (max-width: 600px) {
-            header h1 {
-                font-size: 32px;
-            }
-
-            .gallery {
-                grid-template-columns: 1fr;
-            }
-
-            .card img {
-                height: 230px;
-            }
-        }
-    </style>
-</head>
-
-<body>
-
-    <div class="hearts-bg">
-        <div class="heart-particle">♥</div>
-        <div class="heart-particle">💖</div>
-        <div class="heart-particle">♥</div>
-        <div class="heart-particle">💕</div>
-        <div class="heart-particle">♥</div>
-        <div class="heart-particle">💗</div>
-    </div>
-
-    <header>
-        <h1>💖 แกลเลอรีรูปภาพแห่งความรัก 💖</h1>
-        <p>รวมภาพที่ฉันชื่นชอบ 3 รูป ในธีมวาเลนไทน์</p>
-    </header>
-
-
-    <section class="gallery">
-
-        <div class="card">
-            <img src="https://i.redd.it/240302-riize-instagram-update-with-sohee-v0-zmfanzhb3ylc1.jpg?width=1440&format=pjpg&auto=webp&s=d771443e1d8ea3d471b7cfc0e3834fd2d48c0613" alt="รูปภาพที่ 1">
-
-            <div class="content">
-                <h2>ภาพที่ 1 ❤️</h2>
-                <p>
-                    ภาพที่ฉันชื่นชอบและต้องการนำมาแสดง
-                    พร้อมคำอธิบายสั้น ๆ เกี่ยวกับรูปภาพ
-                </p>
-            </div>
-        </div>
-
-
-        <div class="card">
-            <img src="https://kr.cafe24obs.com/data/celeb-image/QeOPb4F48xggg0ytEQLl.webp" alt="รูปภาพที่ 2">
-
-            <div class="content">
-                <h2>ภาพที่ 2 📸</h2>
-                <p>
-                    ภาพอีกหนึ่งภาพที่มีความหมาย
-                    พร้อมคำอธิบายเกี่ยวกับภาพนี้
-                </p>
-            </div>
-        </div>
-
-
-        <div class="card">
-            <img src="https://static.wikia.nocookie.net/kpop/images/0/08/RIIZE_Wonbin_Sunburst_concept_photo_1.png/revision/latest?cb=20260810061818" alt="รูปภาพที่ 3">
-
-            <div class="content">
-                <h2>ภาพที่ 3 💌</h2>
-                <p>
-                    ภาพที่สามจากแกลเลอรี
-                    สามารถเปลี่ยนเป็นภาพในหัวข้อที่สนใจได้
-                </p>
-            </div>
-        </div>
-
-    </section>
-
-
-    <footer style="color: white;">
-        <p>© 2026 แกลเลอรีรูปภาพของฉัน | Happy Valentine's Day 🌹</p>
-        <p>สร้างสรรค์โดยนักเรียน</p>
-    </footer>
-
-</body>
-</html>
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,
