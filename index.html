@@ -3,34 +3,321 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>แกลเลอรีรูปภาพของฉัน - Theme Heart</title>
+    <title>แกลเลอรีรูปภาพของฉัน</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Mali:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Mali:ital,wght@0,300;0,500;0,700;1,300&family=Prompt:wght@300;400;600&display=swap" rel="stylesheet">
 
     <style>
-        /* ตั้งค่าลูกศรเมาส์เป็นรูปหัวใจ */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='%23ff2a6d'><path d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z'/></svg>"), auto;
+        }
+
+        /* เปลี่ยนเคอร์เซอร์เมาส์เป็นรูปหัวใจ */
+        body, a, button, .card {
+            cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='%23ff4d4d'><path d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z'/></svg>"), auto !important;
         }
 
         body {
-            font-family: "Mali", cursive, sans-serif;
-            background-color: #fff0f3;
-            color: #4a0010;
+            font-family: "Mali", "Prompt", sans-serif;
+            background: #fff5f5;
+            color: #4a4a4a;
             position: relative;
             min-height: 100vh;
             overflow-x: hidden;
         }
 
-        /* หัวใจดวงใหญ่หลากสีตรงกลางฉากหลัง */
+        /* พื้นหลังหัวใจดวงใหญ่จางๆ */
         body::before {
-            content: "♥";
+            content: "";
             position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%,
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #fff0f3;
+            background-image: 
+                radial-gradient(#ffccd5 1.5px, transparent 1.5px),
+                radial-gradient(#ff4d6d 1.5px, #fff0f3 1.5px);
+            background-size: 60px 60px;
+            background-position: 0 0, 30px 30px;
+            opacity: 0.4;
+            z-index: -2;
+        }
+
+        /* ฉากหลังหัวใจลอยหลากสี Animation */
+        .heart-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .floating-heart {
+            position: absolute;
+            bottom: -50px;
+            user-select: none;
+            animation: floatUp linear infinite;
+            opacity: 0.7;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(0) rotate(0deg) scale(0.8);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.8;
+            }
+            90% {
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateY(-105vh) rotate(360deg) scale(1.2);
+                opacity: 0;
+            }
+        }
+
+        /* ส่วนหัว */
+        header {
+            text-align: center;
+            padding: 50px 20px 30px;
+        }
+
+        header h1 {
+            font-size: 42px;
+            color: #d90429;
+            margin-bottom: 12px;
+            text-shadow: 2px 2px 0px #ffffff, 4px 4px 10px rgba(217, 4, 41, 0.2);
+            font-weight: 700;
+        }
+
+        header p {
+            font-size: 20px;
+            color: #ef233c;
+            background: white;
+            display: inline-block;
+            padding: 6px 20px;
+            border-radius: 20px;
+            box-shadow: 0 4px 15px rgba(239, 35, 60, 0.15);
+            border: 2px dashed #ffb3c1;
+        }
+
+        /* แกลเลอรี */
+        .gallery {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        /* การ์ด */
+        .card {
+            background: #ffffff;
+            border-radius: 24px;
+            overflow: hidden;
+            border: 3px solid #ffccd5;
+            box-shadow: 0 10px 20px rgba(217, 4, 41, 0.08);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 18px 30px rgba(217, 4, 41, 0.2);
+            border-color: #ff4d6d;
+        }
+
+        /* รูปภาพ */
+        .card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.4s ease;
+        }
+
+        .card:hover img {
+            transform: scale(1.08);
+        }
+
+        /* ข้อความ */
+        .content {
+            padding: 22px;
+            background: white;
+        }
+
+        .content h2 {
+            font-size: 24px;
+            color: #d90429;
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+
+        .content p {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #555;
+        }
+
+        /* ส่วนท้าย */
+        footer {
+            text-align: center;
+            padding: 30px 20px;
+            margin-top: 50px;
+            background: #d90429;
+            color: white;
+            border-top-left-radius: 30px;
+            border-top-right-radius: 30px;
+            box-shadow: 0 -5px 20px rgba(217, 4, 41, 0.2);
+        }
+
+        footer p {
+            margin: 6px;
+            font-size: 16px;
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .gallery {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 600px) {
+            header h1 {
+                font-size: 32px;
+            }
+
+            .gallery {
+                grid-template-columns: 1fr;
+            }
+
+            .card img {
+                height: 230px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="heart-background">
+        <div class="floating-heart" style="left: 10%; animation-duration: 7s; color: #ff4d6d; font-size: 24px;">❤️</div>
+        <div class="floating-heart" style="left: 20%; animation-duration: 9s; animation-delay: 1s; color: #ff758f; font-size: 32px;">💖</div>
+        <div class="floating-heart" style="left: 35%; animation-duration: 6s; animation-delay: 2s; color: #ff8fa3; font-size: 20px;">💕</div>
+        <div class="floating-heart" style="left: 50%; animation-duration: 8s; animation-delay: 0.5s; color: #c9184a; font-size: 28px;">💗</div>
+        <div class="floating-heart" style="left: 65%; animation-duration: 10s; animation-delay: 3s; color: #ff4d6d; font-size: 36px;">❤️</div>
+        <div class="floating-heart" style="left: 80%; animation-duration: 7.5s; animation-delay: 1.5s; color: #ffb3c1; font-size: 22px;">💓</div>
+        <div class="floating-heart" style="left: 90%; animation-duration: 8.5s; animation-delay: 2.5s; color: #a4133c; font-size: 30px;">ผู้ชาย❤️</div>
+    </div>
+
+    <header>
+        <h1>❤️ แกลเลอรีรูปภาพของฉัน ❤️</h1>
+        <p>รวมภาพที่ฉันชื่นชอบ 3 รูป</p>
+    </header>
+
+    <section class="gallery">
+
+        <div class="card">
+            <img src="https://i.redd.it/240302-riize-instagram-update-with-sohee-v0-zmfanzhb3ylc1.jpg?width=1440&format=pjpg&auto=webp&s=d771443e1d8ea3d471b7cfc0e3834fd2d48c0613" alt="รูปภาพที่ 1">
+            <div class="content">
+                <h2>ภาพที่ 1 💌</h2>
+                <p>
+                    โซฮี (Sohee)
+ชื่อ (สเตจเนม) : โซฮี (Sohee)
+
+ชื่อภาษาเกาหลี : 소희
+
+ชื่อจริง : อีโซฮี (Lee Sohee / 이소희)
+
+วันเกิด : 21 พฤศจิกายน 2003
+
+ตำแหน่ง : เมนโวคอล
+
+MBTI : ISTP
+
+สัญชาติ : เกาหลีใต้
+
+โซฮี เกิดที่เมืองคยองกี ประเทศเกาหลีใต้
+โซฮี ใฝ่ฝันอยากจะร่วมงานกับศิลปินระดับโลกอย่าง Bruno Mars
+โรลโมเดลของโซฮี คือ แบคฮยอน EXO
+                </p>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="https://kr.cafe24obs.com/data/celeb-image/QeOPb4F48xggg0ytEQLl.webp" alt="รูปภาพที่ 2">
+            <div class="content">
+                <h2>ภาพที่ 2 🌹</h2>
+                <p>
+                อึนซอก (Eunseok)
+ชื่อ (สเตจเนม) : อึนซอก (Eunseok)
+
+ชื่อภาษาเกาหลี : 은석
+
+ชื่อจริง : ซงอึนซอก (Song Eunseok / 송은석)
+
+วันเกิด : 19 มีนาคม 2001
+
+ตำแหน่ง : วิชวล
+
+MBTI : ISTP
+
+สัญชาติ : เกาหลีใต้
+
+อึนซอก มีน้องชาย 1 คน
+อึนซอก เคยถูกแมวมองชวนให้มาออดิชันระหว่างที่เขาเดินทางไปโรงเรียน ซึ่งเขาก็ได้ปฏิเสธไปทั้งหมด 4 ครั้ง เพราะแมวมองไม่ยอมบอกชื่อต้นสังกัด แต่สุดท้ายเขาก็ตอบตกลงมาออดิชัน
+งานอดิเรกของอึนซอก คือ ดูอนิเมะ อ่านมังงะ และทำอาหาร
+อึนซอก เป็นเด็กฝึกค่าย SM Entertainment ทั้งหมด 5 ปี
+อึนซอก เคยถูกเปิดตัวเป็นหนึ่งในสมาชิก SMROOKIES เมื่อปี 2022 เพื่อเตรียมตัวเป็นสมาชิกวง NCT ยูนิตใหม่
+โรลโมเดลของอึนซอก คือ ชางมิน TVXQ!
+                </p>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="https://static.wikia.nocookie.net/kpop/images/0/08/RIIZE_Wonbin_Sunburst_concept_photo_1.png/revision/latest?cb=20260810061818" alt="รูปภาพที่ 3">
+            <div class="content">
+                <h2>ภาพที่ 3 ✨</h2>
+                <p>
+                 วอนบิน (Wonbin)
+ชื่อ (สเตจเนม) : วอนบิน (Wonbin)
+
+ชื่อภาษาเกาหลี : 원빈
+
+ชื่อจริง : พัควอนบิน (Park Wonbin / 박원빈)
+
+วันเกิด : 2 มีนาคม 2002
+
+ตำแหน่ง : วิชวล แดนซ์ เซนเตอร์
+
+MBTI : ISTJ
+
+สัญชาติ : เกาหลีใต้
+
+วอนบิน เกิดที่โซล และเติบโตที่เมืองอุลซาน ประเทศเกาหลีใต้ 
+วอนบิน มีพี่ชาย
+วอนบิน เล่นกีตาร์ได้ และชื่นชอบการชอปปิง
+โรลโมเดลของวอนบิน คือ EXO
+                </p>
+            </div>
+        </div>
+
+    </section>
+
+    <footer>
+        <p>© 2026 แกลเลอรีรูปภาพของฉัน ❤️</p>
+        <p>สร้างสรรค์ด้วยความรักโดยนักเรียน</p>
+    </footer>
+
+</body>
+</html>
